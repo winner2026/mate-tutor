@@ -23,14 +23,14 @@ export const CURRICULUM = [
         },
         workedExamples: [
           {
-            problem: "Racionaliza el denominador de la expresión \\frac{2}{\\sqrt{5} - 1}.",
+            problem: "Racionaliza el denominador de la expresión $\\frac{2}{\\sqrt{5} - 1}$.",
             steps: [
               "Multiplicamos por el conjugado $(\\sqrt{5} + 1)$ arriba y abajo.",
-              "Numerador: 2(\\sqrt{5} + 1).",
-              "Denominador: (\\sqrt{5} - 1)(\\sqrt{5} + 1) = (\\sqrt{5})^2 - 1^2 = 5 - 1 = 4.",
-              "Simplificamos entre 2: \\frac{2(\\sqrt{5} + 1)}{4} = \\frac{\\sqrt{5} + 1}{2}."
+              "Numerador: $2(\\sqrt{5} + 1)$.",
+              "Denominador: $(\\sqrt{5} - 1)(\\sqrt{5} + 1) = (\\sqrt{5})^2 - 1^2 = 5 - 1 = 4$.",
+              "Simplificamos entre 2: $\\frac{2(\\sqrt{5} + 1)}{4} = \\frac{\\sqrt{5} + 1}{2}$."
             ],
-            finalAnswer: "\\frac{\\sqrt{5} + 1}{2}"
+            finalAnswer: "$\\frac{\\sqrt{5} + 1}{2}$"
           }
         ],
         exercises: [
@@ -70,15 +70,15 @@ export const CURRICULUM = [
         },
         workedExamples: [
           {
-            problem: "Factoriza el polinomio P(x) = x^3 - 4x^2 + x + 6.",
+            problem: "Factoriza el polinomio $P(x) = x^3 - 4x^2 + x + 6$.",
             steps: [
-              "Término independiente = 6. Posibles raíces: \\pm 1, \\pm 2, \\pm 3, \\pm 6.",
-              "Probamos x = -1: P(-1) = (-1)^3 - 4(-1)^2 + (-1) + 6 = -1 - 4 - 1 + 6 = 0.",
-              "Aplicamos Ruffini dividiendo por (x + 1): resulta el cociente x^2 - 5x + 6.",
-              "Factorizamos x^2 - 5x + 6 = (x - 2)(x - 3).",
-              "Resultado: P(x) = (x + 1)(x - 2)(x - 3)."
+              "Término independiente = $6$. Posibles raíces: $\\pm 1, \\pm 2, \\pm 3, \\pm 6$.",
+              "Probamos $x = -1$: $P(-1) = (-1)^3 - 4(-1)^2 + (-1) + 6 = -1 - 4 - 1 + 6 = 0$.",
+              "Aplicamos Ruffini dividiendo por $(x + 1)$: resulta el cociente $x^2 - 5x + 6$.",
+              "Factorizamos $x^2 - 5x + 6 = (x - 2)(x - 3)$.",
+              "Resultado: $P(x) = (x + 1)(x - 2)(x - 3)$."
             ],
-            finalAnswer: "(x + 1)(x - 2)(x - 3)"
+            finalAnswer: "$P(x) = (x + 1)(x - 2)(x - 3)$"
           }
         ],
         exercises: [
@@ -128,12 +128,12 @@ export const CURRICULUM = [
         },
         workedExamples: [
           {
-            problem: "Dado A = \\{1, 2\\} y B = \\{x, y, z\\}, determina |A \\times B| y escribe sus elementos.",
+            problem: "Dado $A = \\{1, 2\\}$ y $B = \\{x, y, z\\}$, determina $|A \\times B|$ y escribe sus elementos.",
             steps: [
-              "El número de elementos es |A| \\cdot |B| = 2 \\cdot 3 = 6.",
-              "Formamos los pares: (1,x), (1,y), (1,z), (2,x), (2,y), (2,z)."
+              "El número de elementos es $|A| \\cdot |B| = 2 \\cdot 3 = 6$.",
+              "Formamos los pares: $(1,x), (1,y), (1,z), (2,x), (2,y), (2,z)$."
             ],
-            finalAnswer: "A \\times B = \\{(1,x), (1,y), (1,z), (2,x), (2,y), (2,z)\\}"
+            finalAnswer: "$A \\times B = \\{(1,x), (1,y), (1,z), (2,x), (2,y), (2,z)\\}$"
           }
         ],
         exercises: [
@@ -182,14 +182,14 @@ export const CURRICULUM = [
         },
         workedExamples: [
           {
-            problem: "Escribe la contrarrecíproca del enunciado: 'Si n^2 es par, entonces n es par'.",
+            problem: "Escribe la contrarrecíproca del enunciado: 'Si $n^2$ es par, entonces $n$ es par'.",
             steps: [
-              "Identificamos P: n^2 es par, y Q: n es par.",
-              "Negamos Q: n es impar (no par).",
-              "Negamos P: n^2 es impar (no par).",
-              "Formamos la implicación \\neg Q \\implies \\neg P."
+              "Identificamos $P: n^2 \\text{ es par}$, y $Q: n \\text{ es par}$.",
+              "Negamos $Q: n \\text{ es impar}$.",
+              "Negamos $P: n^2 \\text{ es impar}$.",
+              "Formamos la implicación $\\neg Q \\implies \\neg P$."
             ],
-            finalAnswer: "'Si n es impar, entonces n^2 es impar.'"
+            finalAnswer: "'Si $n$ es impar, entonces $n^2$ es impar.'"
           }
         ],
         exercises: [

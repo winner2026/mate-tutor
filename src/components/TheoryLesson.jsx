@@ -105,7 +105,7 @@ export default function TheoryLesson({ topic, onStartPractice, levelInfo }) {
             {topic.workedExamples.map((ex, idx) => (
               <div key={idx} className="glass-panel" style={{ padding: '20px' }}>
                 <div style={{ fontWeight: 600, color: '#FBBF24', marginBottom: '12px', fontSize: '0.95rem' }}>
-                  Problema {idx + 1}: <MathView math={ex.problem} />
+                  Problema {idx + 1}: <FormattedText text={ex.problem} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', paddingLeft: '12px', borderLeft: '2px solid rgba(245, 158, 11, 0.4)' }}>
                   {ex.steps.map((step, stepIdx) => (
@@ -116,7 +116,7 @@ export default function TheoryLesson({ topic, onStartPractice, levelInfo }) {
                   ))}
                 </div>
                 <div style={{ marginTop: '14px', paddingTop: '10px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', fontWeight: 600, color: '#34D399', fontSize: '0.95rem' }}>
-                  Solución Final: <MathView math={ex.finalAnswer} />
+                  Solución Final: <FormattedText text={ex.finalAnswer?.includes('$') ? ex.finalAnswer : `$${ex.finalAnswer}$`} />
                 </div>
               </div>
             ))}
