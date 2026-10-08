@@ -2,22 +2,7 @@ import React, { useState } from 'react';
 import { FAST_PATTERNS } from '../data/patterns';
 import { Zap, Sparkles, CheckCircle2, ArrowRight, ShieldCheck, HelpCircle, Lightbulb } from 'lucide-react';
 import MathView from './MathView';
-
-// Helper to render text containing inline math delimited by $...$
-function FormattedText({ text }) {
-  if (!text) return null;
-  const parts = String(text).split('$');
-  return (
-    <span>
-      {parts.map((part, idx) => {
-        if (idx % 2 === 1) {
-          return <MathView key={idx} math={part} />;
-        }
-        return part;
-      })}
-    </span>
-  );
-}
+import FormattedText from './FormattedText';
 
 export default function FastPatternsView() {
   const [selectedCategory, setSelectedCategory] = useState('Todas');

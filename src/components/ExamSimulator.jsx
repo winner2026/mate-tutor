@@ -1,25 +1,7 @@
 import React, { useState } from 'react';
 import { FileText, Clock, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, Zap, Flame, Award, HelpCircle, RefreshCw } from 'lucide-react';
 import MathView from './MathView';
-
-function FormattedText({ text }) {
-  if (!text) return null;
-  const str = String(text);
-  const parts = str.split('$');
-  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
-    return <MathView math={str} />;
-  }
-  return (
-    <span>
-      {parts.map((part, idx) => {
-        if (idx % 2 === 1) {
-          return <MathView key={idx} math={part} displayMode={part.includes('\\lim') || part.includes('\\frac')} />;
-        }
-        return part;
-      })}
-    </span>
-  );
-}
+import FormattedText from './FormattedText';
 
 const REAL_FING_QUESTIONS = [
   {

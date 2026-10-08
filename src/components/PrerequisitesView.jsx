@@ -2,26 +2,7 @@ import React, { useState } from 'react';
 import { REFLEX_MATRIX, META_PATTERNS, HIERARCHY_BLOCKS } from '../data/prerequisites';
 import { Brain, Zap, Layers, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
 import MathView from './MathView';
-
-// Helper to render text containing inline math delimited by $...$
-function FormattedText({ text }) {
-  if (!text) return null;
-  const str = String(text);
-  const parts = str.split('$');
-  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
-    return <MathView math={str} />;
-  }
-  return (
-    <span>
-      {parts.map((part, idx) => {
-        if (idx % 2 === 1) {
-          return <MathView key={idx} math={part} />;
-        }
-        return part;
-      })}
-    </span>
-  );
-}
+import FormattedText from './FormattedText';
 
 export default function PrerequisitesView() {
   const [activeTab, setActiveTab] = useState('reflejos'); // 'reflejos' | 'metapatrones' | 'bloques'

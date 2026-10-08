@@ -1,22 +1,7 @@
 import React from 'react';
 import { BookOpen, Lightbulb, AlertTriangle, ArrowRight, CheckCircle2, FileText } from 'lucide-react';
 import MathView from './MathView';
-
-// Helper to render text containing inline math delimited by $...$
-function FormattedText({ text }) {
-  if (!text) return null;
-  const parts = text.split('$');
-  return (
-    <span>
-      {parts.map((part, idx) => {
-        if (idx % 2 === 1) {
-          return <MathView key={idx} math={part} />;
-        }
-        return part;
-      })}
-    </span>
-  );
-}
+import FormattedText from './FormattedText';
 
 export default function TheoryLesson({ topic, onStartPractice, levelInfo }) {
   if (!topic) return null;

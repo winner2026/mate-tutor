@@ -2,25 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ADAPTIVE_PATTERNS, LEVEL_THRESHOLDS, DIFFICULTY_DIMENSIONS, getInitialUserState, processAnswer } from '../data/adaptiveEngine';
 import { Target, Zap, ShieldCheck, CheckCircle2, XCircle, ArrowRight, RotateCcw, AlertTriangle, HelpCircle, Award, Layers, Sparkles } from 'lucide-react';
 import MathView from './MathView';
-
-function FormattedText({ text }) {
-  if (!text) return null;
-  const str = String(text);
-  const parts = str.split('$');
-  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
-    return <MathView math={str} />;
-  }
-  return (
-    <span>
-      {parts.map((part, idx) => {
-        if (idx % 2 === 1) {
-          return <MathView key={idx} math={part} displayMode={part.includes('\\lim') || part.includes('\\frac')} />;
-        }
-        return part;
-      })}
-    </span>
-  );
-}
+import FormattedText from './FormattedText';
 
 export default function AdaptiveMasteryView() {
   const [selectedPatternId, setSelectedPatternId] = useState(ADAPTIVE_PATTERNS[0].id);

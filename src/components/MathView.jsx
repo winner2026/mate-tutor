@@ -14,6 +14,18 @@ export default function MathView({ math, displayMode = false, className = '' }) 
           cleanMath = cleanMath.slice(1, -1).trim();
         }
 
+        // Replace common unicode math symbols with standard KaTeX commands
+        cleanMath = cleanMath
+          .replace(/∖/g, '\\setminus ')
+          .replace(/→/g, '\\to ')
+          .replace(/⇒/g, '\\implies ')
+          .replace(/⇔/g, '\\iff ')
+          .replace(/≤/g, '\\le ')
+          .replace(/≥/g, '\\ge ')
+          .replace(/≠/g, '\\neq ')
+          .replace(/∞/g, '\\infty ')
+          .replace(/π/g, '\\pi ');
+
         katex.render(cleanMath, containerRef.current, {
           displayMode: displayMode,
           throwOnError: false
