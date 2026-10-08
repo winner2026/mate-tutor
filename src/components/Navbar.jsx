@@ -1,5 +1,5 @@
 import React from 'react';
-import { BookOpen, Award, Flame, BrainCircuit, FileText, CheckCircle2 } from 'lucide-react';
+import { BookOpen, Award, Flame, BrainCircuit, FileText, CheckCircle2, Target } from 'lucide-react';
 
 export default function Navbar({ progressPercent, streak, currentView, setView }) {
   return (
@@ -45,6 +45,14 @@ export default function Navbar({ progressPercent, streak, currentView, setView }
           style={{ padding: '8px 12px', fontSize: '0.82rem' }}
         >
           <BookOpen size={16} /> Aprender
+        </button>
+
+        <button
+          onClick={() => setView('adaptive')}
+          className={currentView === 'adaptive' ? 'btn-primary' : 'btn-secondary'}
+          style={{ padding: '8px 12px', fontSize: '0.82rem', borderColor: currentView === 'adaptive' ? '#10B981' : 'rgba(16, 185, 129, 0.3)', color: currentView === 'adaptive' ? '#FFFFFF' : '#34D399' }}
+        >
+          <Target size={16} color="#34D399" /> 🎯 Dominio Adaptativo
         </button>
 
         <button

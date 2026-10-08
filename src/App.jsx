@@ -7,6 +7,7 @@ import DiagnosticTest from './components/DiagnosticTest';
 import ExamSimulator from './components/ExamSimulator';
 import FastPatternsView from './components/FastPatternsView';
 import PrerequisitesView from './components/PrerequisitesView';
+import AdaptiveMasteryView from './components/AdaptiveMasteryView';
 import { CURRICULUM } from './data/curriculum';
 
 export default function App() {
@@ -95,6 +96,10 @@ export default function App() {
                 />
               )}
             </>
+          )}
+
+          {currentView === 'adaptive' && (
+            <AdaptiveMasteryView />
           )}
 
           {currentView === 'patterns' && (
