@@ -1,5 +1,5 @@
-// MOTOR ADAPTATIVO MVP: ESTÁNDAR 20 EJERCICIOS POR PATRÓN FING (UDELAR)
-// Distribución exacta: 2 Diag + 3 Rec + 4 Ejec + 4 Var + 3 Integ + 2 Trans + 2 FING = 20 Ejercicios
+// MOTOR ADAPTATIVO AVANZADO: MULTI-MÉTRICAS & CERTIFICACIÓN DE MAESTRÍA Y TRANSFERENCIA FING
+// Separa: Dominio del Patrón, Capacidad de Transferencia (Nivel 5) y Preparación FING (Nivel 6)
 
 export const LEVEL_THRESHOLDS = {
   0: { name: "0. Diagnóstico", targetAccuracy: 1.0, requiredPass: 2, skipAllowed: true, targetCount: 2 },
@@ -25,7 +25,7 @@ export const ADAPTIVE_PATTERNS = [
     id: "patron-dif-cuadrados",
     title: "Diferencia de Cuadrados $a^2 - b^2$",
     category: "Álgebra & Factorización",
-    description: "Reconocimiento y ejecución del patrón $a^2 - b^2 = (a-b)(a+b)$ adaptativo.",
+    description: "Reconocimiento, ejecución y transferencia del patrón $a^2 - b^2 = (a-b)(a+b)$ en Cálculo FING.",
     targetBankSize: 20,
     bank: [
       // NIVEL 0: DIAGNÓSTICO (2 ejercicios)
@@ -130,18 +130,13 @@ export const ADAPTIVE_PATTERNS = [
         explanation: "$a^2 - (9b)^2 = (a-9b)(a+9b)$."
       },
 
-      // NIVEL 3: VARIACIONES (4 ejercicios - descomposición y factores comunes)
+      // NIVEL 3: VARIACIONES (4 ejercicios)
       {
         id: "dc-3-1",
         level: 3,
         type: "variation",
         question: "Factoriza completamente: $4x^2 - 36$",
-        options: [
-          "$4(x-3)(x+3)$",
-          "$(2x-6)(2x+6)$ pero incompleta",
-          "$4(x-9)(x+9)$",
-          "$(4x-6)(4x+6)$"
-        ],
+        options: ["$4(x-3)(x+3)$", "$(2x-6)(2x+6)$ pero incompleta", "$4(x-9)(x+9)$", "$(4x-6)(4x+6)$"],
         correctAnswer: 0,
         explanation: "1º Factor común: $4(x^2 - 9)$. 2º Diferencia de cuadrados: $4(x-3)(x+3)$."
       },
@@ -150,12 +145,7 @@ export const ADAPTIVE_PATTERNS = [
         level: 3,
         type: "variation",
         question: "Factoriza totalmente la potencia par: $x^4 - 16$",
-        options: [
-          "$(x-2)(x+2)(x^2+4)$",
-          "$(x^2-4)(x^2+4)$ pero incompleta",
-          "$(x-2)^2(x+2)^2$",
-          "$(x-4)(x+4)(x^2+4)$"
-        ],
+        options: ["$(x-2)(x+2)(x^2+4)$", "$(x^2-4)(x^2+4)$ pero incompleta", "$(x-2)^2(x+2)^2$", "$(x-4)(x+4)(x^2+4)$"],
         correctAnswer: 0,
         explanation: "1º $(x^2-4)(x^2+4)$. 2º Descomponer $x^2-4 = (x-2)(x+2)$."
       },
@@ -165,12 +155,7 @@ export const ADAPTIVE_PATTERNS = [
         type: "contrast",
         isContrast: true,
         question: "⚡ EJERCICIO DE CONTRASTE: Compara $A = x^2 - 9$ y $B = x^2 + 9$. ¿Por qué se resuelven distinto?",
-        options: [
-          "A es diferencia de cuadrados $(x-3)(x+3)$; B no se factoriza en Reales $\\mathbb{R}$",
-          "Ambos se factorizan igual como $(x-3)(x+3)$",
-          "B se factoriza como $(x+3)^2$",
-          "A es primo y B es compuesto"
-        ],
+        options: ["A es diferencia de cuadrados $(x-3)(x+3)$; B no se factoriza en Reales $\\mathbb{R}$", "Ambos se factorizan igual", "B es $(x+3)^2$", "A es primo y B compuesto"],
         correctAnswer: 0,
         explanation: "La resta $a^2-b^2$ tiene raíces reales, mientras que la suma de cuadrados $a^2+b^2$ no es reducible en $\\mathbb{R}$."
       },
@@ -180,12 +165,7 @@ export const ADAPTIVE_PATTERNS = [
         type: "trap",
         isTrap: true,
         question: "⚠️ EJERCICIO TRAMPA: ¿Es verdadero que $\\sqrt{x^2} = x$ para todo $x \\in \\mathbb{R}$?",
-        options: [
-          "Falso, la regla rigurosa en $\\mathbb{R}$ es $\\sqrt{x^2} = |x|$",
-          "Verdadero siempre",
-          "Verdadero solo si $x < 0$",
-          "Falso, siempre da $-x$"
-        ],
+        options: ["Falso, la regla rigurosa en $\\mathbb{R}$ es $\\sqrt{x^2} = |x|$", "Verdadero siempre", "Verdadero solo si $x < 0$", "Falso, siempre da $-x$"],
         correctAnswer: 0,
         explanation: "¡Error clásico FING! Para $x = -5$, $\\sqrt{(-5)^2} = \\sqrt{25} = 5 = |-5|$."
       },
@@ -205,12 +185,7 @@ export const ADAPTIVE_PATTERNS = [
         level: 4,
         type: "integration",
         question: "Calcula el dominio de $f(x) = \\frac{1}{x^2 - 16}$:",
-        options: [
-          "$\\mathbb{R} \\setminus \\{-4, 4\\}$",
-          "$\\mathbb{R} \\setminus \\{4\\}$",
-          "$(4, +\\infty)$",
-          "$\\mathbb{R} \\setminus \\{16\\}$"
-        ],
+        options: ["$\\mathbb{R} \\setminus \\{-4, 4\\}$", "$\\mathbb{R} \\setminus \\{4\\}$", "$(4, +\\infty)$", "$\\mathbb{R} \\setminus \\{16\\}$"],
         correctAnswer: 0,
         explanation: "Denominador se anula en $x^2-16 = 0 \\implies x = \\pm 4$."
       },
@@ -264,87 +239,6 @@ export const ADAPTIVE_PATTERNS = [
         explanation: "Límite en 2 es 4. $k^2 = 4 \\implies k = \\pm 2$."
       }
     ]
-  },
-  {
-    id: "patron-indeterminacion-cero",
-    title: "Indeterminación $0/0$ por Factorización",
-    category: "Límites & Cálculo",
-    description: "Resolución de indeterminaciones del tipo $\\frac{0}{0}$ cancelando el factor $(x - a)$ que anula la expresión.",
-    targetBankSize: 20,
-    bank: [
-      {
-        id: "lim-0-1",
-        level: 0,
-        type: "diagnostic",
-        question: "Al evaluar $\\lim_{x \\to 2} \\frac{x - 2}{x^2 - 4}$, ¿qué indeterminación se presenta?",
-        options: ["$\\frac{0}{0}$", "$\\frac{\\infty}{\\infty}$", "$0 \\cdot \\infty$", "$1^\\infty$"],
-        correctAnswer: 0,
-        explanation: "En $x=2$: numerador $2-2=0$ y denominador $4-4=0$, indeterminación $\\frac{0}{0}$."
-      },
-      {
-        id: "lim-0-2",
-        level: 0,
-        type: "diagnostic",
-        question: "Resuelve el límite levantando la indeterminación: $$\\lim_{x \\to 2} \\frac{x - 2}{x^2 - 4}$$",
-        options: ["$\\frac{1}{4}$", "$\\frac{1}{2}$", "$0$", "$4$"],
-        correctAnswer: 0,
-        explanation: "$\\frac{x-2}{(x-2)(x+2)} = \\frac{1}{x+2} \\implies \\frac{1}{4}$."
-      },
-      {
-        id: "lim-1-1",
-        level: 1,
-        type: "recognition",
-        question: "En una indeterminación $\\frac{0}{0}$ cuando $x \\to a$, ¿qué factor algebraico debemos cancelar en numerador y denominador?",
-        options: ["$(x - a)$", "$(x + a)$", "$x$", "$a$"],
-        correctAnswer: 0,
-        explanation: "Por el Teorema del Factor, la causa de anulación en $x=a$ es siempre $(x - a)$."
-      },
-      {
-        id: "lim-2-1",
-        level: 2,
-        type: "mechanic",
-        question: "Calcula: $$\\lim_{x \\to 1} \\frac{x^2 - 1}{x - 1}$$",
-        options: ["$2$", "$1$", "$0$", "No existe"],
-        correctAnswer: 0,
-        explanation: "$\\frac{(x-1)(x+1)}{x-1} = x+1 \\implies 2$."
-      },
-      {
-        id: "lim-3-1",
-        level: 3,
-        type: "variation",
-        question: "Calcula el límite con trinomio: $$\\lim_{x \\to 3} \\frac{x^2 - 5x + 6}{x - 3}$$",
-        options: ["$1$", "$-1$", "$0$", "$6$"],
-        correctAnswer: 0,
-        explanation: "$\\frac{(x-3)(x-2)}{x-3} = x-2 \\implies 3-2 = 1$."
-      },
-      {
-        id: "lim-4-1",
-        level: 4,
-        type: "integration",
-        question: "Simplifica y calcula el límite doblemente indeterminado: $$\\lim_{x \\to 2} \\frac{x^3 - 8}{x^2 - 4}$$",
-        options: ["$3$", "$\\frac{3}{2}$", "$0$", "$\\frac{12}{4} = 3$"],
-        correctAnswer: 0,
-        explanation: "Numerador $x^3-8 = (x-2)(x^2+2x+4)$. Denominador $(x-2)(x+2)$. Queda $\\frac{4+4+4}{4} = 3$."
-      },
-      {
-        id: "lim-5-1",
-        level: 5,
-        type: "transfer",
-        question: "Determina $a$ para que exista el límite finito: $$\\lim_{x \\to 1} \\frac{x^2 + ax - 3}{x - 1}$$",
-        options: ["$a = 2$", "$a = 3$", "$a = -2$", "$a = 1$"],
-        correctAnswer: 0,
-        explanation: "Para indeterminación levantable $0/0$, el numerador en $x=1$ debe ser 0: $1^2 + a(1) - 3 = 0 \\implies a = 2$."
-      },
-      {
-        id: "lim-6-1",
-        level: 6,
-        type: "fing",
-        question: "⭐ PARCIAL FING: Si $\\lim_{x \\to 0} \\frac{\\sin(2x)}{x} = 2$, halla el límite: $$\\lim_{x \\to 0} \\frac{x^2 + \\sin(2x)}{3x}$$",
-        options: ["$\\frac{2}{3}$", "$1$", "$\\frac{1}{3}$", "$0$", "$\\frac{3}{2}$"],
-        correctAnswer: 0,
-        explanation: "$\\frac{x}{3} + \\frac{\\sin(2x)}{3x} \\implies 0 + \\frac{1}{3}(2) = \\frac{2}{3}$."
-      }
-    ]
   }
 ];
 
@@ -358,16 +252,10 @@ export function getInitialUserState() {
         levelScores: { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] },
         unlockedLevel: 0,
         history: [],
-        masteryPercent: 0,
-        totalCorrect: 0
-      },
-      "patron-indeterminacion-cero": {
-        currentLevel: 0,
-        diagnosticPassed: false,
-        levelScores: { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] },
-        unlockedLevel: 0,
-        history: [],
-        masteryPercent: 0,
+        patternMastery: 0,       // 🟢 Dominio del Patrón (Niveles 1-3)
+        transferMastery: 0,      // 🔵 Capacidad de Transferencia (Nivel 5)
+        fingPreparedness: 0,     // ⭐ Preparación Examen FING (Nivel 6)
+        certifiedMastery: false, // 🏆 Certificación de Maestría Demostrada
         totalCorrect: 0
       }
     }
@@ -383,7 +271,10 @@ export function processAnswer(userState, patternId, questionObj, isCorrect) {
       levelScores: { 0: [], 1: [], 2: [], 3: [], 4: [], 5: [], 6: [] },
       unlockedLevel: 0,
       history: [],
-      masteryPercent: 0,
+      patternMastery: 0,
+      transferMastery: 0,
+      fingPreparedness: 0,
+      certifiedMastery: false,
       totalCorrect: 0
     };
   }
@@ -429,12 +320,40 @@ export function processAnswer(userState, patternId, questionObj, isCorrect) {
     }
   }
 
-  // EARLY STOP MASTERY RULE:
-  // If student correctly answers >= 8 exercises with unlockedLevel >= 5, pattern is 100% Mastered!
-  if (prog.totalCorrect >= 8 && prog.unlockedLevel >= 5) {
-    prog.masteryPercent = 100;
+  // 1. PATTERN MASTERY (🟢 Dominio del Patrón - Niveles 1 a 3)
+  const lvl123Correct = [1, 2, 3].reduce((acc, l) => {
+    const scores = prog.levelScores[l] || [];
+    return acc + scores.filter(s => s === 1).length;
+  }, 0);
+  prog.patternMastery = Math.min(100, Math.round((lvl123Correct / 8) * 100));
+
+  // 2. TRANSFER MASTERY (🔵 Capacidad de Transferencia - Nivel 5)
+  const lvl5Scores = prog.levelScores[5] || [];
+  const lvl5Correct = lvl5Scores.filter(s => s === 1).length;
+  prog.transferMastery = lvl5Scores.length > 0 ? Math.round((lvl5Correct / lvl5Scores.length) * 100) : 0;
+
+  // 3. FING PREPAREDNESS (⭐ Preparación FING - Nivel 6)
+  const lvl6Scores = prog.levelScores[6] || [];
+  const lvl6Correct = lvl6Scores.filter(s => s === 1).length;
+  prog.fingPreparedness = lvl6Scores.length > 0 ? Math.round((lvl6Correct / lvl6Scores.length) * 100) : 0;
+
+  // 4. RIGOROUS CERTIFICATION OF DEMONSTRATED MASTERY (100% CERTIFIED)
+  // Criteria:
+  // - Unlocked Level >= 5
+  // - Total Correct >= 10
+  // - At least 1 correct answer in Transfer (Level 5) or FING (Level 6)
+  // - Demonstrated mastery across at least 3 distinct levels
+  const distinctLevelsMastered = [1, 2, 3, 4, 5, 6].filter(l => {
+    const s = prog.levelScores[l] || [];
+    return s.length > 0 && (s.filter(x => x === 1).length / s.length) >= 0.75;
+  }).length;
+
+  const hasTransferOrFingSuccess = (lvl5Correct >= 1) || (lvl6Correct >= 1);
+
+  if (prog.unlockedLevel >= 5 && prog.totalCorrect >= 10 && distinctLevelsMastered >= 3 && hasTransferOrFingSuccess) {
+    prog.certifiedMastery = true;
   } else {
-    prog.masteryPercent = Math.min(100, Math.round((prog.unlockedLevel / 6) * 100));
+    prog.certifiedMastery = false;
   }
 
   return newState;

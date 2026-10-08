@@ -133,21 +133,36 @@ export default function AdaptiveMasteryView() {
             </h2>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-            <div>
-              <div style={{ fontSize: '0.75rem', color: '#9CA3AF', marginBottom: '4px', textAlign: 'right' }}>
-                Dominio del Patrón
+          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '6px 12px', borderRadius: '8px', border: '1px solid rgba(16, 185, 129, 0.3)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.7rem', color: '#34D399', fontWeight: 700, textTransform: 'uppercase' }}>🟢 Dominio Patrón</div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#34D399' }}>{patternProg.patternMastery || 0}%</div>
               </div>
-              <div style={{ fontSize: '1.3rem', fontWeight: 800, color: '#34D399', textAlign: 'right' }}>
-                {patternProg.masteryPercent}%
+
+              <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '6px 12px', borderRadius: '8px', border: '1px solid rgba(59, 130, 246, 0.3)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.7rem', color: '#60A5FA', fontWeight: 700, textTransform: 'uppercase' }}>🔵 Transferencia</div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#60A5FA' }}>{patternProg.transferMastery || 0}%</div>
+              </div>
+
+              <div style={{ background: 'rgba(245, 158, 11, 0.1)', padding: '6px 12px', borderRadius: '8px', border: '1px solid rgba(245, 158, 11, 0.3)', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.7rem', color: '#FBBF24', fontWeight: 700, textTransform: 'uppercase' }}>⭐ Examen FING</div>
+                <div style={{ fontSize: '1.15rem', fontWeight: 800, color: '#FBBF24' }}>{patternProg.fingPreparedness || 0}%</div>
               </div>
             </div>
+
+            {patternProg.certifiedMastery && (
+              <div style={{ background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(5, 150, 105, 0.2) 100%)', color: '#34D399', padding: '8px 14px', borderRadius: '12px', border: '1px solid #10B981', fontWeight: 800, fontSize: '0.82rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Award size={18} color="#34D399" /> 🏆 Maestría Demostrada
+              </div>
+            )}
+
             <button
               onClick={handleResetPattern}
               className="btn-secondary"
               style={{ padding: '8px 14px', fontSize: '0.8rem', display: 'flex', alignItems: 'center', gap: '6px' }}
             >
-              <RotateCcw size={14} /> Reiniciar Patrón
+              <RotateCcw size={14} /> Reiniciar
             </button>
           </div>
         </div>
