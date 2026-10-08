@@ -169,7 +169,7 @@ export default function FastPatternsView() {
             </div>
 
             <div style={{ paddingTop: '12px', borderTop: '1px solid rgba(255, 255, 255, 0.08)', color: '#34D399', fontWeight: 700, fontSize: '1.05rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <CheckCircle2 size={20} color="#10B981" /> Respuesta Directa: <MathView math={activePattern.fastAnswer} />
+              <CheckCircle2 size={20} color="#10B981" /> Respuesta Directa: <FormattedText text={activePattern.fastAnswer?.includes('$') ? activePattern.fastAnswer : `$${activePattern.fastAnswer}$`} />
             </div>
           </div>
         </div>

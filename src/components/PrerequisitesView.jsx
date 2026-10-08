@@ -6,7 +6,11 @@ import MathView from './MathView';
 // Helper to render text containing inline math delimited by $...$
 function FormattedText({ text }) {
   if (!text) return null;
-  const parts = String(text).split('$');
+  const str = String(text);
+  const parts = str.split('$');
+  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
+    return <MathView math={str} />;
+  }
   return (
     <span>
       {parts.map((part, idx) => {
@@ -109,7 +113,7 @@ export default function PrerequisitesView() {
                 <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
                   {meta.examples.map((ex, exIdx) => (
                     <div key={exIdx} style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '6px 12px', borderRadius: '8px' }}>
-                      <MathView math={ex} />
+                      <FormattedText text={ex} />
                     </div>
                   ))}
                 </div>

@@ -2,6 +2,25 @@ import React, { useState } from 'react';
 import { HelpCircle, CheckCircle, XCircle, ArrowRight, RotateCcw, Lightbulb, Trophy, Sparkles } from 'lucide-react';
 import MathView from './MathView';
 
+function FormattedText({ text }) {
+  if (!text) return null;
+  const str = String(text);
+  const parts = str.split('$');
+  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
+    return <MathView math={str} />;
+  }
+  return (
+    <span>
+      {parts.map((part, idx) => {
+        if (idx % 2 === 1) {
+          return <MathView key={idx} math={part} displayMode={part.includes('\\lim') || part.includes('\\frac')} />;
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
 export default function ExercisePractice({ topic, onCompleteTopic, onBackToTheory }) {
   const [currentExIndex, setCurrentExIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -185,7 +204,7 @@ export default function ExercisePractice({ topic, onCompleteTopic, onBackToTheor
                     Opción {String.fromCharCode(65 + idx)}
                   </div>
                   <div style={{ fontSize: '1.15rem', color: '#F9FAFB', fontWeight: 500 }}>
-                    <MathView math={opt} />
+                    <FormattedText text={opt} />
                   </div>
                 </div>
                 {isSubmitted && idx === exercise.correctAnswer && (

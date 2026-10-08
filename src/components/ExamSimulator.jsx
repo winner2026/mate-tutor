@@ -2,6 +2,25 @@ import React, { useState } from 'react';
 import { FileText, Clock, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck } from 'lucide-react';
 import MathView from './MathView';
 
+function FormattedText({ text }) {
+  if (!text) return null;
+  const str = String(text);
+  const parts = str.split('$');
+  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
+    return <MathView math={str} />;
+  }
+  return (
+    <span>
+      {parts.map((part, idx) => {
+        if (idx % 2 === 1) {
+          return <MathView key={idx} math={part} displayMode={part.includes('\\lim') || part.includes('\\frac')} />;
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
 const REAL_FING_QUESTIONS = [
   {
     id: "fing-2026-1",
@@ -129,7 +148,7 @@ export default function ExamSimulator() {
                   Opción {String.fromCharCode(65 + idx)}
                 </div>
                 <div style={{ fontSize: '1.15rem', color: '#F9FAFB', fontWeight: 500 }}>
-                  <MathView math={opt} />
+                  <FormattedText text={opt} />
                 </div>
               </button>
             );

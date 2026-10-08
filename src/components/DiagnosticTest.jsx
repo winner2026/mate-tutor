@@ -3,6 +3,25 @@ import { DIAGNOSTIC_QUESTIONS } from '../data/curriculum';
 import { CheckCircle2, AlertCircle, ArrowRight, BrainCircuit, RotateCcw } from 'lucide-react';
 import MathView from './MathView';
 
+function FormattedText({ text }) {
+  if (!text) return null;
+  const str = String(text);
+  const parts = str.split('$');
+  if (parts.length === 1 && (str.includes('\\') || str.includes('^') || str.includes('_'))) {
+    return <MathView math={str} />;
+  }
+  return (
+    <span>
+      {parts.map((part, idx) => {
+        if (idx % 2 === 1) {
+          return <MathView key={idx} math={part} displayMode={part.includes('\\lim') || part.includes('\\frac')} />;
+        }
+        return part;
+      })}
+    </span>
+  );
+}
+
 export default function DiagnosticTest({ onFinishDiagnostic }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState({});
@@ -148,7 +167,7 @@ export default function DiagnosticTest({ onFinishDiagnostic }) {
                 }}>
                   {String.fromCharCode(65 + idx)}
                 </span>
-                <MathView math={opt} />
+                <FormattedText text={opt} />
               </button>
             );
           })}
