@@ -84,7 +84,7 @@ export default function Navbar({ progressPercent, streak, currentView, setView }
           className={currentView === 'exam' ? 'btn-primary' : 'btn-secondary'}
           style={{ padding: '8px 12px', fontSize: '0.82rem' }}
         >
-          <FileText size={16} color="#F59E0B" /> Parciales FING
+          <FileText size={16} color="#F59E0B" /> Exámenes FING
         </button>
       </div>
 
