@@ -114,10 +114,10 @@ export default function AdaptiveMasteryView() {
           <Target size={18} color="#818CF8" /> Motor de Aprendizaje Adaptativo por Dominio
         </div>
         <h1 style={{ fontSize: '2rem', fontWeight: 800, color: '#F9FAFB', marginBottom: '10px', letterSpacing: '-0.02em' }}>
-          Entrenamiento por Niveles de Dificultad Adaptativa
+          Entrenamiento Adaptativo (Estándar 20 Ejercicios por Patrón)
         </h1>
-        <p style={{ fontSize: '1rem', color: '#9CA3AF', maxWidth: '840px', lineHeight: 1.6 }}>
-          La dificultad se adapta automáticamente a tu nivel real. Supera el Nivel 0 de Diagnóstico para saltar directamente a variaciones complejas o avanza paso a paso desde Reconocimiento hasta la Maestría FING.
+        <p style={{ fontSize: '1rem', color: '#9CA3AF', maxWidth: '880px', lineHeight: 1.6 }}>
+          Cada patrón dispone de <strong>20 ejercicios candidatos</strong> (2 Diag + 3 Rec + 4 Ejec + 4 Var + 3 Integ + 2 Trans + 2 FING). No necesitas resolver los 20: con demostrar dominio en <strong>8 a 12 ejercicios</strong> el sistema te otorga el 100% de Maestría FING.
         </p>
       </div>
 
