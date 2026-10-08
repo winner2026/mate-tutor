@@ -640,7 +640,7 @@ export const CURRICULUM = [
     "macroPillar": "Integración FING",
     "badgeClass": "badge-nivel-5",
     "color": "#F43F5E",
-    "description": "Pensamiento de Sistema Integrado: Reconocimiento de patrones, integración multipatrón, problemas sin indicación de método, gestión de distractores, simulacros oficiales y análisis post-simulacro.",
+    "description": "Pensamiento de Sistema Integrado: Reconocimiento de patrones, Selección de herramientas, Integración multipatrón, Transferencia autónoma, Simulacro PI y Autopsia analítica post-simulacro.",
     "books": [
       "Repartido Oficial Completo PI FING",
       "Pruebas Iniciales FING 2020-2026"
@@ -648,33 +648,36 @@ export const CURRICULUM = [
     "topics": [
       {
         "id": "entrenamiento-pi",
-        "title": "10.1 - 10.6 Sistema Integrado, Simulacros y Análisis Post-Simulacro",
-        "subtitle": "Integración multipatrón, gestión de tiempo real y desglose analítico de errores",
+        "title": "10.1 - 10.6 Sistema de Integración y Autopsia FING",
+        "subtitle": "10.1 Patrones | 10.2 Herramientas | 10.3 Multipatrón | 10.4 Transferencia | 10.5 Simulacro | 10.6 Autopsia",
         "theory": {
-          "concept": "En la facultad de ingeniería los problemas no vienen etiquetados por tema. El estudiante debe elegir autónomamente la combinación de herramientas (factorización + dominio + límite + análisis conceptual) y evitar opciones tractoras engañosas.",
+          "concept": "En la FING los problemas no vienen etiquetados por capítulo. Debes ejecutar 6 habilidades integradas: 1) Reconocer el patrón, 2) Seleccionar la herramienta, 3) Combinar múltiples patrones, 4) Transferir a problemas no vistos, 5) Simular en tiempo real y 6) Realizar la autopsia analítica de tus errores.",
           "formulas": [
             {
-              "label": "Métrica de Desempeño FING",
-              "latex": "Puntaje = \\frac{\\text{Respuestas Correctas} - \\text{Penalizaciones}}{\\text{Total}} \\ge 60\\%"
+              "label": "Clasificación de Errores (Autopsia)",
+              "latex": "\\text{Error Total} = \\text{Error Conceptual} + \\text{Error Algebraico} + \\text{Error de Estrategia} + \\text{Tiempo Limitado}"
             }
           ],
-          "tips": "Realiza un análisis post-simulacro clasificando tus fallos en: Error Algebraico, Error Conceptual o Error de Estrategia.",
-          "pitfall": "Avanzar en el examen sin haber desarrollado la capacidad de descartar distractores lógicos."
+          "tips": "En la autopsia post-simulacro, no te conformes con ver la respuesta correcta: identifica la causa raíz exacta por la que fallaste.",
+          "pitfall": "Confundir un error de estrategia (elegir el método equivocado) con un error algebraico (despeje de signo)."
         },
         "workedExamples": [
           {
-            "problem": "Evalúa el límite integrador $\\lim_{x \\to 0} \\frac{e^{3x} - 1}{\\tan(2x)}$.",
+            "problem": "Un problema requiere calcular $\\lim_{x \\to 0} \\frac{\\sqrt{x^2+1}-1}{\\tan^2(3x)}$. ¿Qué secuencia multipatrón aplicas?",
             "steps": [
-              "Identificamos equivalencias: $e^{3x} - 1 \\sim 3x$ y $\\tan(2x) \\sim 2x$.",
-              "Sustituimos: $\\lim_{x \\to 0} \\frac{3x}{2x} = \\frac{3}{2}$."
+              "10.1 Reconocimiento: Indeterminación 0/0 con raíces e infinitésimos trigonométricos.",
+              "10.2 Herramientas: Conjugado en numerador + equivalencias trigonométricas en denominador.",
+              "10.3 Integración: Multiplicar por $(\\sqrt{x^2+1}+1) \\implies \\frac{x^2}{x^2+1-1...} = \\frac{x^2}{x^2(\\sqrt{x^2+1}+1)} = \\frac{1}{2}$.",
+              "En el denominador: $\\tan^2(3x) \\sim (3x)^2 = 9x^2$.",
+              "Resultado final: $\\frac{x^2/2}{9x^2} = \\frac{1}{18}$."
             ],
-            "finalAnswer": "$\\frac{3}{2}$"
+            "finalAnswer": "$\\frac{1}{18}$"
           }
         ],
         "exercises": [
           {
             "id": "ex-10-1",
-            "question": "⭐ SIMULACRO FING: Resuelve el sistema lineal sin calculadora: $$\\begin{cases} 2x - y = 5 \\\\ x + 3y = 6 \\end{cases}$$ ¿Cuánto vale la suma $x + y$?",
+            "question": "⭐ SIMULACRO FING (Multipatrón): Resuelve el sistema lineal sin calculadora: $$\\begin{cases} 2x - y = 5 \\\\ x + 3y = 6 \\end{cases}$$ ¿Cuánto vale la suma $x + y$?",
             "type": "mcq",
             "options": [
               "$4$",
@@ -683,7 +686,7 @@ export const CURRICULUM = [
               "$6$"
             ],
             "correctAnswer": 0,
-            "hints": ["De $x = 6 - 3y$, sustituye en la 1ra ecuacion: $2(6-3y) - y = 5 \\implies y = 1, x = 3$."],
+            "hints": ["De $x = 6 - 3y$, sustituye en la 1ra ecuación: $2(6-3y) - y = 5 \\implies y = 1, x = 3$."],
             "explanation": "$x = 3, y = 1 \\implies x + y = 4$."
           }
         ]

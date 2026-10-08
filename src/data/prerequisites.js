@@ -123,45 +123,97 @@ export const HIERARCHY_BLOCKS = [
       { num: "Nivel 13", name: "Funciones por Partes", rule: "Determina en qué tramo estás antes de aplicar fórmulas." },
       { num: "Nivel 14", name: "Transformaciones Gráficas", rule: "f(x+a) desplaza a la izquierda; f(x)+a sube." }
     ]
-  },
-  {
-    id: "bloque-c",
-    title: "🟡 BLOQUE C — Representación y Geometría Analítica",
-    color: "#EAB308",
-    badge: "Visual & Geométrico",
-    description: "Rectas, pendientes, parábolas, circunferencias, gráficos e interpretación de tasas.",
-    levels: [
-      { num: "Nivel 15", name: "Rectas y Pendiente", rule: "m = (y2 - y1)/(x2 - x1). Perpendiculares m1 * m2 = -1." },
-      { num: "Nivel 16", name: "Geometría Analítica", rule: "Distancia, circunferencia (x-a)^2 + (y-b)^2 = r^2." },
-      { num: "Nivel 23", name: "Lectura de Gráficos", rule: "Extraer límites, ceros y discontinuidades visualmente." },
-      { num: "Nivel 25", name: "Tasas de Cambio Media", rule: "[f(b) - f(a)] / [b - a] como preparación a derivada." }
-    ]
-  },
-  {
-    id: "bloque-d",
-    title: "🟢 BLOQUE D — Trigonometría & Trascendentes",
-    color: "#10B981",
-    badge: "Dominio Trascendente",
-    description: "Círculo trigonométrico, valores notables, identidades, exponenciales y logaritmos.",
-    levels: [
-      { num: "Nivel 17", name: "Valores Trigonométricos Notables", rule: "Seno y coseno de 0, pi/6, pi/4, pi/3, pi/2 de memoria." },
-      { num: "Nivel 18", name: "Identidades Fundamentales", rule: "sin^2(x) + cos^2(x) = 1 y ángulo doble." },
-      { num: "Nivel 20", name: "Exponenciales", rule: "e^0 = 1, e^{a+b} = e^a * e^b, e^{\\ln x} = x." },
-      { num: "Nivel 21", name: "Logaritmos", rule: "\\ln(ab) = \\ln a + \\ln b, \\ln(a^r) = r \\ln a." },
-      { num: "Nivel 22", name: "Cambio de Representación", rule: "a^x = e^{x \\ln a}, \\log(a^x) = x \\log a." }
-    ]
-  },
-  {
-    id: "bloque-e",
-    title: "🔵 BLOQUE E — Razonamiento Matemático & Examen PI",
-    color: "#6366F1",
-    badge: "Lógica & Examen",
-    description: "Conjuntos, lógica, cuantificadores, contraejemplos, estimación y verificación.",
-    levels: [
-      { num: "Nivel 34", name: "Lógica y Cuantificadores", rule: "Negar (para todo) resulta en (existe un contraejemplo)." },
-      { num: "Nivel 36", name: "Búsqueda de Contraejemplos", rule: "Refuta afirmaciones universales falsas con una sola instancia." },
-      { num: "Nivel 37", name: "Condiciones Necesarias y Suficientes", rule: "No inviertas implicaciones (Derivable => Continua, pero no al revés)." },
-      { num: "Nivel 38", name: "Estimación y Rango de Soluciones", rule: "Descarta opciones numéricamente absurdas antes de calcular." }
-    ]
   }
 ];
+
+// GRAFO DE PRERREQUISITOS POR PATRÓN Y TEMA
+export const PREREQUISITE_GRAPH = {
+  'aritmetica-operatoria': {
+    name: '0.1 & 0.2 Aritmética y Operatoria',
+    prereqs: [],
+    minRequiredMastery: 0
+  },
+  'factorizacion-ruffini': {
+    name: '0.3 & 0.4 Factorización y Ruffini',
+    prereqs: ['aritmetica-operatoria'],
+    minRequiredMastery: 60
+  },
+  'conjuntos-producto-cartesiano': {
+    name: '1.1 - 1.4 Conjuntos e Intervalos',
+    prereqs: ['aritmetica-operatoria'],
+    minRequiredMastery: 50
+  },
+  'logica-demostraciones': {
+    name: '2.1 - 2.6 Lógica e Inducción',
+    prereqs: ['conjuntos-producto-cartesiano'],
+    minRequiredMastery: 50
+  },
+  'inecuaciones-valor-absoluto': {
+    name: '3.1 - 3.6 Inecuaciones y Valor Absoluto',
+    prereqs: ['factorizacion-ruffini', 'logica-demostraciones'],
+    minRequiredMastery: 60
+  },
+  'funciones-composicion-inversa': {
+    name: '4.1 - 4.6 Funciones e Inversa',
+    prereqs: ['inecuaciones-valor-absoluto'],
+    minRequiredMastery: 60
+  },
+  'trigonometria-fundamentos': {
+    name: '5.1 - 5.5 Trigonometría',
+    prereqs: ['funciones-composicion-inversa'],
+    minRequiredMastery: 60
+  },
+  'limites-indeterminaciones': {
+    name: '6.1 - 6.8 Límites',
+    prereqs: ['trigonometria-fundamentos', 'factorizacion-ruffini'],
+    minRequiredMastery: 65
+  },
+  'continuidad-empalmes': {
+    name: '7.1 - 7.4 Continuidad',
+    prereqs: ['limites-indeterminaciones'],
+    minRequiredMastery: 65
+  },
+  'derivadas-tangente-monotonia': {
+    name: '8.1 - 8.9 Derivadas',
+    prereqs: ['continuidad-empalmes', 'trigonometria-fundamentos'],
+    minRequiredMastery: 70
+  },
+  'modelizacion-optimizacion': {
+    name: '9.1 - 9.7 Modelización para Ingeniería',
+    prereqs: ['derivadas-tangente-monotonia', 'inecuaciones-valor-absoluto'],
+    minRequiredMastery: 70
+  },
+  'entrenamiento-pi': {
+    name: '10.1 - 10.6 Integración FING',
+    prereqs: ['modelizacion-optimizacion'],
+    minRequiredMastery: 75
+  }
+};
+
+export function evaluatePrerequisites(targetTopicId, topicMasteryScores = {}) {
+  const node = PREREQUISITE_GRAPH[targetTopicId];
+  if (!node || !node.prereqs || node.prereqs.length === 0) {
+    return { isBlocked: false, weakPrerequisite: null, warningMessage: null };
+  }
+
+  for (const prereqId of node.prereqs) {
+    const prereqNode = PREREQUISITE_GRAPH[prereqId];
+    const currentScore = topicMasteryScores[prereqId] || 0;
+    const requiredScore = node.minRequiredMastery;
+
+    if (currentScore < requiredScore) {
+      return {
+        isBlocked: true,
+        weakPrerequisite: {
+          id: prereqId,
+          name: prereqNode ? prereqNode.name : prereqId,
+          score: currentScore,
+          required: requiredScore
+        },
+        warningMessage: `⚠️ Prerrequisito Débil Detectado: Tu dominio en "${prereqNode ? prereqNode.name : prereqId}" es de ${currentScore}%, pero requieres ${requiredScore}% para abordar este tema sin lagunas conceptuales.`
+      };
+    }
+  }
+
+  return { isBlocked: false, weakPrerequisite: null, warningMessage: null };
+}

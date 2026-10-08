@@ -1,6 +1,7 @@
 import React from 'react';
-import { CheckCircle, Lock, BookOpen, ChevronRight, Sparkles, Compass } from 'lucide-react';
+import { CheckCircle, Lock, BookOpen, ChevronRight, Sparkles, Compass, AlertTriangle } from 'lucide-react';
 import { CURRICULUM } from '../data/curriculum';
+import { evaluatePrerequisites } from '../data/prerequisites';
 
 export default function Sidebar({ selectedTopic, setSelectedTopic, completedTopics, currentLevelId }) {
   let lastPillar = null;
@@ -89,17 +90,23 @@ export default function Sidebar({ selectedTopic, setSelectedTopic, completedTopi
                     {level.topics.map((topic) => {
                       const isSelected = selectedTopic?.id === topic.id;
                       const isDone = completedTopics.includes(topic.id);
+                      const prereqEval = evaluatePrerequisites(topic.id, {});
 
                       return (
                         <button
                           key={topic.id}
                           onClick={() => setSelectedTopic(topic)}
+                          title={prereqEval.warningMessage || topic.title}
                           style={{
                             width: '100%',
                             textAlign: 'left',
                             padding: '10px 12px',
                             borderRadius: '8px',
-                            border: isSelected ? '1px solid rgba(99, 102, 241, 0.5)' : '1px solid transparent',
+                            border: isSelected
+                              ? '1px solid rgba(99, 102, 241, 0.5)'
+                              : prereqEval.isBlocked
+                              ? '1px solid rgba(245, 158, 11, 0.3)'
+                              : '1px solid transparent',
                             background: isSelected
                               ? 'linear-gradient(135deg, rgba(99, 102, 241, 0.25) 0%, rgba(79, 70, 229, 0.15) 100%)'
                               : isDone
@@ -118,6 +125,8 @@ export default function Sidebar({ selectedTopic, setSelectedTopic, completedTopi
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
                             {isDone ? (
                               <CheckCircle size={14} color="#10B981" style={{ flexShrink: 0 }} />
+                            ) : prereqEval.isBlocked ? (
+                              <AlertTriangle size={14} color="#F59E0B" style={{ flexShrink: 0 }} />
                             ) : (
                               <BookOpen size={14} style={{ opacity: isSelected ? 1 : 0.6, flexShrink: 0 }} />
                             )}
