@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { FileText, Clock, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, Zap, Flame, Award, HelpCircle, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { FileText, Clock, CheckCircle2, AlertTriangle, ArrowRight, ShieldCheck, Zap, Flame, Award, HelpCircle, RefreshCw, Timer, Pause, Play } from 'lucide-react';
 import MathView from './MathView';
 import FormattedText from './FormattedText';
 
@@ -387,6 +387,41 @@ export default function ExamSimulator() {
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
+  // Dual Timer States: General Exam Timer & Per-Exercise Timer
+  const [totalSeconds, setTotalSeconds] = useState(0);
+  const [exerciseSeconds, setExerciseSeconds] = useState(0);
+  const [timerMode, setTimerMode] = useState('general'); // 'general' | 'exercise' | 'both'
+  const [isTimerActive, setIsTimerActive] = useState(true);
+
+  // Interval effect: tick every second when active
+  useEffect(() => {
+    let interval = null;
+    if (isTimerActive) {
+      interval = setInterval(() => {
+        setTotalSeconds(prev => prev + 1);
+        setExerciseSeconds(prev => prev + 1);
+      }, 1000);
+    } else {
+      clearInterval(interval);
+    }
+    return () => clearInterval(interval);
+  }, [isTimerActive]);
+
+  // Reset exercise timer whenever current question changes
+  useEffect(() => {
+    setExerciseSeconds(0);
+  }, [currentIdx]);
+
+  const formatTime = (secs) => {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    if (h > 0) {
+      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  };
+
   const q = REAL_FING_QUESTIONS[currentIdx];
 
   const handleSubmit = () => {
@@ -410,12 +445,15 @@ export default function ExamSimulator() {
     setSelectedOption(null);
     setSubmitted(false);
     setScore(0);
+    setTotalSeconds(0);
+    setExerciseSeconds(0);
+    setIsTimerActive(true);
   };
 
   return (
     <div className="animate-fade-in" style={{ padding: '32px 24px', maxWidth: '920px', margin: '0 auto' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#F59E0B', fontWeight: 700, fontSize: '0.85rem', marginBottom: '4px' }}>
             <Flame size={18} fill="#F59E0B" color="#F59E0B" /> {q.difficulty}
@@ -432,6 +470,148 @@ export default function ExamSimulator() {
           <div style={{ background: 'rgba(16, 185, 129, 0.15)', color: '#34D399', padding: '6px 14px', borderRadius: '20px', border: '1px solid rgba(16, 185, 129, 0.3)', fontSize: '0.85rem', fontWeight: 700 }}>
             Puntaje Examen: {score}/{REAL_FING_QUESTIONS.length}
           </div>
+        </div>
+      </div>
+
+      {/* Dual Timer Selector & Display Control Bar */}
+      <div className="glass-card" style={{
+        padding: '14px 20px',
+        marginBottom: '20px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+        gap: '12px',
+        background: 'rgba(31, 41, 55, 0.65)',
+        border: '1px solid rgba(255, 255, 255, 0.1)',
+        borderRadius: '16px'
+      }}>
+        {/* Timer Mode Selection */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+          <span style={{ fontSize: '0.78rem', color: '#9CA3AF', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.05em', marginRight: '4px' }}>
+            Seleccionar Reloj:
+          </span>
+
+          <button
+            onClick={() => setTimerMode('general')}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '20px',
+              border: timerMode === 'general' ? '1px solid #3B82F6' : '1px solid rgba(255,255,255,0.1)',
+              background: timerMode === 'general' ? 'rgba(59, 130, 246, 0.25)' : 'rgba(255,255,255,0.05)',
+              color: timerMode === 'general' ? '#60A5FA' : '#9CA3AF',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Clock size={15} /> ⏱️ General Examen
+          </button>
+
+          <button
+            onClick={() => setTimerMode('exercise')}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '20px',
+              border: timerMode === 'exercise' ? '1px solid #F59E0B' : '1px solid rgba(255,255,255,0.1)',
+              background: timerMode === 'exercise' ? 'rgba(245, 158, 11, 0.25)' : 'rgba(255,255,255,0.05)',
+              color: timerMode === 'exercise' ? '#FBBF24' : '#9CA3AF',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Timer size={15} /> ⏳ Por Ejercicio
+          </button>
+
+          <button
+            onClick={() => setTimerMode('both')}
+            style={{
+              padding: '6px 14px',
+              borderRadius: '20px',
+              border: timerMode === 'both' ? '1px solid #10B981' : '1px solid rgba(255,255,255,0.1)',
+              background: timerMode === 'both' ? 'rgba(16, 185, 129, 0.25)' : 'rgba(255,255,255,0.05)',
+              color: timerMode === 'both' ? '#34D399' : '#9CA3AF',
+              fontSize: '0.82rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <Zap size={15} /> ⚡ Ambos Relojes
+          </button>
+        </div>
+
+        {/* Active Timer Badges & Pause/Play Control */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {(timerMode === 'general' || timerMode === 'both') && (
+            <div style={{
+              background: 'rgba(59, 130, 246, 0.15)',
+              border: '1px solid rgba(59, 130, 246, 0.3)',
+              color: '#60A5FA',
+              padding: '6px 14px',
+              borderRadius: '12px',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <Clock size={16} color="#60A5FA" />
+              <span>Examen: {formatTime(totalSeconds)}</span>
+            </div>
+          )}
+
+          {(timerMode === 'exercise' || timerMode === 'both') && (
+            <div style={{
+              background: 'rgba(245, 158, 11, 0.15)',
+              border: '1px solid rgba(245, 158, 11, 0.3)',
+              color: '#FBBF24',
+              padding: '6px 14px',
+              borderRadius: '12px',
+              fontSize: '0.85rem',
+              fontWeight: 700,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px'
+            }}>
+              <Timer size={16} color="#FBBF24" />
+              <span>Ejercicio {currentIdx + 1}: {formatTime(exerciseSeconds)}</span>
+            </div>
+          )}
+
+          <button
+            onClick={() => setIsTimerActive(!isTimerActive)}
+            title={isTimerActive ? "Pausar cronómetro" : "Reanudar cronómetro"}
+            style={{
+              background: isTimerActive ? 'rgba(239, 68, 68, 0.2)' : 'rgba(16, 185, 129, 0.2)',
+              border: isTimerActive ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid rgba(16, 185, 129, 0.4)',
+              color: isTimerActive ? '#F87171' : '#34D399',
+              padding: '6px 12px',
+              borderRadius: '10px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              fontSize: '0.82rem',
+              fontWeight: 700,
+              transition: 'all 0.2s ease'
+            }}
+          >
+            {isTimerActive ? <Pause size={15} /> : <Play size={15} />}
+            {isTimerActive ? "Pausar" : "Reanudar"}
+          </button>
         </div>
       </div>
 
